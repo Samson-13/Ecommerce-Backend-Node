@@ -22,7 +22,6 @@ export const addCategory = async (
   try {
     const { name, description, image, status } = req.body;
 
-    // Generate slug from name
     const slug = name.trim().toLowerCase().replace(/\s+/g, "-");
 
     const newCategory = await categoryService.addCategory({
