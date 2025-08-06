@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import * as categoryService from "../services/category.service";
-import { Category } from "../models/category.model";
+import { z } from "zod";
+import { createCategoriesSchema } from "../schemas/categories.schema";
+
+type CreateCategoryInput = z.infer<typeof createCategoriesSchema>;
 
 export const getCategories = async (_req: Request, res: Response) => {
   try {
@@ -13,12 +16,24 @@ export const getCategories = async (_req: Request, res: Response) => {
 };
 
 export const addCategory = async (
-  req: Request<{}, {}, Omit<Category, "id">>,
+  req: Request<{}, {}, CreateCategoryInput>,
   res: Response
 ) => {
   try {
-    const newCategory = await categoryService.addCategory(req.body);
-    res.status(201).json(newCategory);
+    const { name, description, image, status } = req.body;
+
+    // Generate slug from name
+    const slug = name.trim().toLowerCase().replace(/\s+/g, "-");
+
+    const newCategory = await categoryService.addCategory({
+      name,
+      description,
+      image,
+      status,
+      slug,
+    });
+
+    res.status(201).json({ message: "Category created", data: newCategory });
   } catch (error) {
     console.error("Error adding category:", error);
     res.status(500).json({ error: "Failed to add category" });
