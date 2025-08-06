@@ -1,20 +1,15 @@
 import { Request, Response } from "express";
-import { Categories } from "../models/categories.model";
-
-let categories: Categories[] = [
-  { id: 1, name: "T-Shirt", productCount: 499, status: true },
-  { id: 2, name: "Shoes", productCount: 1299, status: true },
-];
-
+import * as categoryService from "../services/categories.service";
+import { Category } from "../models/category.model";
 export const getCategories = (_req: Request, res: Response) => {
-  res.json(categories);
+  const allCategories = categoryService.getCategories();
+  res.json(allCategories);
 };
 
-export const addCategories = (req: Request, res: Response) => {
-  const newCategories: Categories = {
-    id: categories.length + 1,
-    ...req.body,
-  };
-  categories.push(newCategories);
-  res.status(201).json(newCategories);
+export const addCategory = (
+  req: Request<{}, {}, Omit<Category, "id">>,
+  res: Response
+) => {
+  const newCategory = categoryService.addCategory(req.body);
+  res.status(201).json(newCategory);
 };
