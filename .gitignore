@@ -42,3 +42,5 @@ nyc_output/
 tmp/
 temp/
 .cache/
+
+/src/generated/prisma
