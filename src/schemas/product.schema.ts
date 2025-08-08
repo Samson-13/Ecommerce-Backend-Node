@@ -7,8 +7,8 @@ export const createProductSchema = z.object({
   discount: z.number().min(0).max(100).optional(),
   inStock: z.boolean(),
   stock: z.number().min(0, "Stock must be at least 0"),
-  categoryId: z.number().int().positive("Category ID must be positive"),
-  images: z.array(z.string().url({ message: "Invalid image URL" })),
+  categoryId: z.string().min(1, "Category ID is required"),
+  images: z.array(z.string().min(1)).optional(),
   tags: z.array(z.string()).optional(),
   rating: z.number().min(0).max(5).optional(),
 });

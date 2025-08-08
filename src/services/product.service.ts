@@ -2,7 +2,7 @@
 import prisma from "../lib/prisma";
 import { Prisma } from "../generated/prisma";
 
-export const getAllProducts = async () => {
+export const getProducts = async () => {
   return await prisma.product.findMany();
 };
 

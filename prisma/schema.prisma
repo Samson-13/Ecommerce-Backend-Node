@@ -18,6 +18,7 @@ model Product {
   stock       Int
   categoryId  String    @db.ObjectId
   images      String[]
+  tags        String[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
