@@ -12,3 +12,9 @@ export const createProductSchema = z.object({
   tags: z.array(z.string()).optional(),
   rating: z.number().min(0).max(5).optional(),
 });
+
+export const updateProductSchema = createProductSchema.partial();
+
+export const productIdSchema = z.object({
+  id: z.string().min(1, "Product ID is required"),
+});
