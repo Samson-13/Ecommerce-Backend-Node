@@ -7,3 +7,9 @@ export const createCategoriesSchema = z.object({
   slug: z.string().min(1),
   status: z.boolean(),
 });
+
+export const updateCategorySchema = createCategoriesSchema.partial();
+
+export const categoryIdSchema = z.object({
+  id: z.string().min(1, "Category ID is required"),
+});
