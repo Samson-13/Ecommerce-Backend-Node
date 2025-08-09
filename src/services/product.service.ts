@@ -17,6 +17,7 @@ export const createProduct = async (
 export const getProductById = async (id: string) => {
   return await prisma.product.findUnique({
     where: { id },
+    include: { category: true },
   });
 };
 

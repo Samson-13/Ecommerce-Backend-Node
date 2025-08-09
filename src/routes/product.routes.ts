@@ -4,13 +4,13 @@ import {
   addProduct,
   deleteProduct,
   updateProduct,
+  getProductById,
 } from "../controllers/product.controller";
 import { validateRequest } from "../middlewares/validateRequest";
 import {
   createProductSchema,
   updateProductSchema,
 } from "../schemas/product.schema";
-import { getProductById } from "../services/product.service";
 
 const router = express.Router();
 
