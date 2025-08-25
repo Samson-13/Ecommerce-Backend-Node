@@ -37,3 +37,12 @@ model Category {
 
   products    Product[] // one-to-many relation
 }
+
+model Page {
+  id          String    @id @map("_id") @default(auto()) @db.ObjectId
+  name        String
+  content     String
+  slug        String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
